@@ -25,7 +25,50 @@ class HomePage extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: Text("hello"),
+          child: Card(
+            elevation: 20,
+            margin: EdgeInsets.all(50),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.35,
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Nombre de Usuario',
+                      icon: Icon(Icons.person),
+                    ),
+                    controller: _userNameController,
+                    keyboardType: TextInputType.text,
+                    onSubmitted: (_) => _submitData(),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                        labelText: 'Contraseña', icon: Icon(Icons.vpn_key)),
+                    controller: _userPassword,
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
+                    onSubmitted: (_) => _submitData(),
+                  ),
+                  SizedBox(height: 20),
+                  RaisedButton(
+                    child: Text('Iniciar Sesion'),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    onPressed: _submitData,
+                  ),
+                  SizedBox(height: 10),
+                  FlatButton(
+                    onPressed: _submitData,
+                    child: Text("Registarse"),
+                    textColor: Colors.blue,
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
