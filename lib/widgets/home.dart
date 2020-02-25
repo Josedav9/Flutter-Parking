@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:parking/contants.dart';
+import 'package:parking/widgets/register.dart';
 
 class HomePage extends StatelessWidget {
   final _userNameController = TextEditingController();
   final _userPassword = TextEditingController();
-  final url = '';
+  final url = REQUEST_URL+SIGN_IN;
 
-  void _submitData() {
+  void _submitData() async {
     String userName = _userNameController.text;
     String userPassword = _userPassword.text;
-    var body = {'user_name': userName, 'password': userPassword};
-    http.post(url, body: {...body}).then((response) {
-      print(response.body);
-    });
+    var json = {'username': userName, 'password': userPassword};
+    try {
+      var response = await http.post(url, body: json);
+      if(response.statusCode > 399){
+        throw new ErrorDescription(response.body);
+      }else{
+        print(response.body);
+      }
+    } catch (e) {
+      print("[Login Error] $e");
+    }
   }
 
   @override
@@ -21,11 +30,15 @@ class HomePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [const Color(0xffed00), const Color(0x020024)],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.blue[900], Colors.lightBlue],
           ),
         ),
         child: Center(
           child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(70)),
             elevation: 20,
             margin: EdgeInsets.all(50),
             child: Container(
@@ -61,7 +74,12 @@ class HomePage extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   FlatButton(
-                    onPressed: _submitData,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterPage()));
+                    },
                     child: Text("Registarse"),
                     textColor: Colors.blue,
                   )
