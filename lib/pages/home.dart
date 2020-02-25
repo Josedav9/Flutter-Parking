@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+
+import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 import 'package:parking/contants.dart';
-import 'package:parking/widgets/register.dart';
+import 'package:parking/models/UserResponse.dart';
+import 'package:parking/pages/register.dart';
+
 
 class HomePage extends StatelessWidget {
   final _userNameController = TextEditingController();
@@ -11,13 +16,15 @@ class HomePage extends StatelessWidget {
   void _submitData() async {
     String userName = _userNameController.text;
     String userPassword = _userPassword.text;
-    var json = {'username': userName, 'password': userPassword};
+    var body = {'username': userName, 'password': userPassword};
     try {
-      var response = await http.post(url, body: json);
+      var response = await http.post(url, body: body);
       if(response.statusCode > 399){
         throw new ErrorDescription(response.body);
       }else{
-        print(response.body);
+        // TODO: Add the user token to persist inside the provider
+        var userData = UserData.fromJson(json.decode(response.body));
+        print(userData.user.firstName);
       }
     } catch (e) {
       print("[Login Error] $e");

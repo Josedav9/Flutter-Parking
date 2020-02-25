@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:parking/widgets/home.dart';
-import 'package:parking/widgets/register.dart';
+import 'package:parking/pages/home.dart';
+import 'package:parking/pages/register.dart';
 
 void main() => runApp(MyApp());
 
