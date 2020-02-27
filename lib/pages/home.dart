@@ -18,8 +18,8 @@ class HomePage extends StatelessWidget {
     String userPassword = _userPassword.text;
     var body = {'username': userName, 'password': userPassword};
     try {
-      var response = await http.post(url, body: body);
-      if(response.statusCode > 399){
+      var response = await http.post(url, body: jsonEncode(body), headers: {"Content-Type": "application/json"});
+      if(response.statusCode >= 400){
         throw new ErrorDescription(response.body);
       }else{
         // TODO: Add the user token to persist inside the provider
