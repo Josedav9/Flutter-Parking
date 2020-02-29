@@ -1,27 +1,53 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:parking/models/User.dart';
 
-UserData userDataFromJson(String str) => UserData.fromJson(json.decode(str));
+class UserData extends ChangeNotifier {
+  String token;
+  User user;
 
-String userDataToJson(UserData data) => json.encode(data.toJson());
+  UserData({
+    this.token,
+    this.user,
+  });
 
-class UserData {
-    String token;
-    User user;
+  User get getUser {
+    return this.user;
+  }
 
-    UserData({
-        this.token,
-        this.user,
-    });
+  String get getToken {
+    return this.token;
+  }
 
-    factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+  set setToken(String token) {
+    this.token = token;
+  }
+
+  set setUser(User user) {
+    this.user = User(
+      roles: user.roles,
+      points: user.points,
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+      firstName: user.firstName,
+      neighborhoodcode: user.neighborhoodcode,
+      lastName: user.lastName,
+      enabled: user.enabled,
+      neighborhood: user.neighborhood,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      v: user.v,
+    );
+  }
+
+  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         token: json["token"],
         user: User.fromJson(json["user"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "token": token,
         "user": user.toJson(),
-    };
+      };
 }

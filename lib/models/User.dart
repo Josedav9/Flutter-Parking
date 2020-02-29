@@ -33,6 +33,11 @@ class User {
     this.v,
   });
 
+  String get name {
+    return this.firstName;
+  }
+
+  // Creates a new user from json data
   factory User.fromJson(Map<String, dynamic> json) => User(
         roles: List<String>.from(json["roles"].map((x) => x)),
         points: json["points"],
@@ -50,6 +55,7 @@ class User {
         v: json["__v"],
       );
 
+  // returns the actuall user parse as json
   Map<String, dynamic> toJson() => {
         "roles": List<dynamic>.from(roles.map((x) => x)),
         "points": points,
