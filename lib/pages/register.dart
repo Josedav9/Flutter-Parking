@@ -15,6 +15,7 @@ class RegisterPage extends StatelessWidget {
   final _lastName = TextEditingController();
   final _code = TextEditingController();
   final _blockNumber = TextEditingController();
+  final _homeNumber = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   String _simpleValidation(value) {
@@ -36,10 +37,14 @@ class RegisterPage extends StatelessWidget {
         'firstName': this._name.text,
         'neighborhoodcode': this._code.text,
         'lastName': this._lastName.text,
+        'blockNumber': this._blockNumber,
+        'homeNumber': this._homeNumber,
         'enabled': true
       };
       try {
-        var response = await http.post(url, body: jsonEncode(formData), headers: {"Content-Type": "application/json"});
+        var response = await http.post(url,
+            body: jsonEncode(formData),
+            headers: {"Content-Type": "application/json"});
         if (response.statusCode >= 400) {
           throw new ErrorDescription(response.body);
         } else {
@@ -50,6 +55,8 @@ class RegisterPage extends StatelessWidget {
           this._name.clear();
           this._code.clear();
           this._lastName.clear();
+          this._blockNumber.clear();
+          this._homeNumber.clear();
           Navigator.pop(context);
         }
       } catch (e) {
@@ -175,6 +182,36 @@ class RegisterPage extends StatelessWidget {
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
                     controller: _code,
+                    validator: _simpleValidation,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[100]))),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Numero del bloque",
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                    controller: _blockNumber,
+                    validator: _simpleValidation,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[100]))),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Numbero de apartamento",
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                    controller: _homeNumber,
                     validator: _simpleValidation,
                   ),
                 ),
