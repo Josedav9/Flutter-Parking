@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:parking/models/UserVehicles.dart';
+import 'package:parking/provider/api.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:parking/models/UserResponse.dart';
 import 'package:parking/shared/drawer_navigation.dart';
+import 'package:parking/shared/create_edit_car.dart';
 
 class HomePage extends StatelessWidget {
+  var user;
   static final autos = [
 /*     {
       'Tipo de vehiculo': 'Carro',
@@ -21,9 +25,29 @@ class HomePage extends StatelessWidget {
     }, */
   ];
 
+  initState(UserData user, UserVehicles vh){
+    Api().getUserVehicles(user).then((value) {
+      print(value);
+    });
+  }
+
+  _addNewCar(BuildContext ctx, UserData user) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: CreateEditCar(user),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserData>(context);
+    final vehicles = Provider.of<UserVehicles>(context);
     final userInitials = user.getUser.name.substring(0, 1) +
         user.getUser.lastName.substring(0, 1);
     return Scaffold(
@@ -61,31 +85,34 @@ class HomePage extends StatelessWidget {
                     horizontal: 5,
                   ),
                   child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        child: Padding(
-                          padding: EdgeInsets.all(6),
-                          child: FittedBox(
-                            child: Text(userInitials.toUpperCase()),
-                          ),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: Text(userInitials.toUpperCase()),
                         ),
                       ),
-                      title: Text(autos[index]['placa']),
-                      subtitle: Text(autos[index]['plan']),
-                      trailing: Switch(
-                          value: true,
-                          onChanged: (bool value) {
-                            print(value);
-                          })),
+                    ),
+                    title: Text(autos[index]['placa']),
+                    subtitle: Text(autos[index]['plan']),
+                    trailing: Switch(
+                        value: true,
+                        onChanged: (bool value) {
+                          print(value);
+                        }),
+                  ),
                 );
             }),
           )
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _addNewCar(context, user);
+        },
         child: Icon(Icons.add),
-        ),
+      ),
     );
   }
 }

@@ -37,8 +37,8 @@ class RegisterPage extends StatelessWidget {
         'firstName': this._name.text,
         'neighborhoodcode': this._code.text,
         'lastName': this._lastName.text,
-        'blockNumber': this._blockNumber,
-        'homeNumber': this._homeNumber,
+        'blockNumber': this._blockNumber.text,
+        'homeNumber': this._homeNumber.text,
         'enabled': true
       };
       try {
