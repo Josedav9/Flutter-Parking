@@ -25,7 +25,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final user = Provider.of<UserData>(context);
 
     return Scaffold(

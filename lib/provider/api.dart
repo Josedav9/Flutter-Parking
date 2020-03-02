@@ -16,7 +16,6 @@ class Api {
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
       } else {
-        // TODO: Add the user token to persist inside the provider
         print(response.body);
         return new Future.value(UserData.fromJson(json.decode(response.body)));
       }
