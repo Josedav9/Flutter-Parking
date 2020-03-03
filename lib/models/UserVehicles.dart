@@ -5,10 +5,15 @@ import 'package:parking/models/Vehicle.dart';
 
 class UserVehicles extends ChangeNotifier {
   /// Internal, private state of the cart.
-  final List<Vehicle> _vehicles = [];
+  List<Vehicle> _vehicles = [];
 
   /// An unmodifiable view of the items in the cart.
   UnmodifiableListView<Vehicle> get vehicles => UnmodifiableListView(_vehicles);
+
+  void set(List<Vehicle> vehicles) {
+    this._vehicles = vehicles;
+    notifyListeners();
+  }
 
   /// Adds [Vehicle] to cart. This is the only way to modify the cart from outside.
   void add(Vehicle vehicle) {

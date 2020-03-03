@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:parking/models/UserResponse.dart';
 import 'package:parking/provider/api.dart';
+import 'package:provider/provider.dart';
+import 'package:parking/models/UserVehicles.dart';
 
 class CreateEditCar extends StatefulWidget {
 
@@ -67,9 +69,10 @@ class _CreateEditCarState extends State<CreateEditCar> {
 
       Api api = new Api();
 
-      api.addCar(widget.user.getToken, formDate).then((onValue) {
+      api.addCar(widget.user.getToken, formDate).then((vehicle) {
+        final userVehicles = Provider.of<UserVehicles>(context, listen: false);
+        userVehicles.add(vehicle);
         Navigator.of(context).pop();
-        print(onValue);
       });
 
     }

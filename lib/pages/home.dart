@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:parking/models/UserVehicles.dart';
-import 'package:parking/provider/api.dart';
 
 import 'package:provider/provider.dart';
 
@@ -9,7 +8,6 @@ import 'package:parking/shared/drawer_navigation.dart';
 import 'package:parking/shared/create_edit_car.dart';
 
 class HomePage extends StatelessWidget {
-  var user;
   static final autos = [
 /*     {
       'Tipo de vehiculo': 'Carro',
@@ -24,12 +22,6 @@ class HomePage extends StatelessWidget {
       'enabled': false
     }, */
   ];
-
-  initState(UserData user, UserVehicles vh){
-    Api().getUserVehicles(user).then((value) {
-      print(value);
-    });
-  }
 
   _addNewCar(BuildContext ctx, UserData user) {
     showModalBottomSheet(
@@ -47,7 +39,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserData>(context);
-    final vehicles = Provider.of<UserVehicles>(context);
+    final userVehicles = Provider.of<UserVehicles>(context);
     final userInitials = user.getUser.name.substring(0, 1) +
         user.getUser.lastName.substring(0, 1);
     return Scaffold(
@@ -78,7 +70,7 @@ class HomePage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              if (index < autos.length)
+              if (index < userVehicles.vehicles.length)
                 return Card(
                   margin: EdgeInsets.symmetric(
                     vertical: 8,
@@ -94,8 +86,8 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    title: Text(autos[index]['placa']),
-                    subtitle: Text(autos[index]['plan']),
+                    title: Text(userVehicles.getByPosition(index).plate),
+                    subtitle: Text(userVehicles.getByPosition(index).brand +"-"+ userVehicles.getByPosition(index).color),
                     trailing: Switch(
                         value: true,
                         onChanged: (bool value) {

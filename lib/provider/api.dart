@@ -27,7 +27,7 @@ class Api {
     }
   }
 
-  Future<String> addCar(String token, Map<String, dynamic> datos) async {
+  Future<Vehicle> addCar(String token, Map<String, dynamic> datos) async {
     try {
       print(datos);
       var response = await http.post(
@@ -39,7 +39,8 @@ class Api {
         throw new ErrorDescription(response.body);
       } else {
         print(response.body);
-        return new Future.value("Done");
+        var vehicles = Vehicle.fromJson(json.decode(response.body));
+        return new Future.value(vehicles);
       }
     } catch (e) {
       print("[addVehicle Error] $e");

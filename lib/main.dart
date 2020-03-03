@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         Provider<UserData>(
           create: (_) => UserData(),
         ),
-        Provider<UserVehicles>(
+        ChangeNotifierProvider<UserVehicles>(
           create: (_) => UserVehicles(),
         )
       ],
