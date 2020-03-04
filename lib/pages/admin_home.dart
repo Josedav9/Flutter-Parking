@@ -7,7 +7,8 @@ import 'package:parking/models/UserResponse.dart';
 import 'package:parking/shared/drawer_navigation.dart';
 import 'package:parking/shared/create_edit_car.dart';
 
-class HomePage extends StatelessWidget {
+class AdminHome extends StatelessWidget {
+
   _addNewCar(BuildContext ctx, UserData user) {
     showModalBottomSheet(
       context: ctx,
@@ -32,15 +33,6 @@ class HomePage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('admin-edit');
-                },
-                tooltip: "Editar usuario",
-              )
-            ],
             pinned: true,
             expandedHeight: MediaQuery.of(context).size.height * 0.30,
             flexibleSpace: Container(
@@ -53,7 +45,7 @@ class HomePage extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  "Bienvenido ${user.getUser.username}",
+                  "Bienvenido ${user.getUser.firstName}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -81,9 +73,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     title: Text(userVehicles.getByPosition(index).plate),
-                    subtitle: Text(userVehicles.getByPosition(index).brand +
-                        "-" +
-                        userVehicles.getByPosition(index).color),
+                    subtitle: Text(userVehicles.getByPosition(index).brand +"-"+ userVehicles.getByPosition(index).color),
                     trailing: Switch(
                         value: true,
                         onChanged: (bool value) {

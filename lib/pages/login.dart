@@ -21,8 +21,8 @@ class LoginPage extends StatelessWidget {
       userProvider.setToken = user.token;
       userProvider.setUser = user.user;
       try {
-      var vehiclesRes = await api.getUserVehicles(user);
-      vehiclesProvider.set(vehiclesRes);
+        var vehiclesRes = await api.getUserVehicles(user);
+        vehiclesProvider.set(vehiclesRes);
       } catch (e) {
       }
       Navigator.pushNamed(ctx, 'home');
@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
             elevation: 20,
             margin: EdgeInsets.all(50),
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.35,
+              height: MediaQuery.of(context).size.height * 0.40,
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,6 +87,16 @@ class LoginPage extends StatelessWidget {
                               builder: (context) => RegisterPage()));
                     },
                     child: Text("Registarse"),
+                    textColor: Colors.blue,
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterPage()));
+                    },
+                    child: Text("Registarse Admin"),
                     textColor: Colors.blue,
                   )
                 ],

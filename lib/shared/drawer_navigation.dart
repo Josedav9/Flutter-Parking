@@ -29,6 +29,33 @@ class DrawerNavigation extends StatelessWidget {
               ),
             ),
           ),
+          ListTile(
+            title: Text(
+              'Autos',
+              style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, 'home');
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Editar Usuarios',
+              style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, 'admin-edit');
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Cerrar Sesion',
+              style: TextStyle(fontSize: 16, color: Colors.red[300]),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, 'login');
+            },
+          ),
         ],
       ),
     );

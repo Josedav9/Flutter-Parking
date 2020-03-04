@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:parking/models/UserResponse.dart';
 import 'package:parking/models/UserVehicles.dart';
+import 'package:parking/pages/admin_edit.dart';
+import 'package:parking/pages/admin_home.dart';
+import 'package:parking/pages/register_admin.dart';
 
 import 'package:provider/provider.dart';
 
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<UserData>(
+        ChangeNotifierProvider<UserData>(
           create: (_) => UserData(),
         ),
         ChangeNotifierProvider<UserVehicles>(
@@ -39,7 +42,10 @@ class MyApp extends StatelessWidget {
         routes: {
           'login': (context) => LoginPage(),
           'register': (context) => RegisterPage(),
-          'home': (context) => HomePage()
+          'home': (context) => HomePage(),
+          'register-admin': (context) => RegisterAdminPage(),
+          'admin-home': (context) => AdminHome(),
+          'admin-edit': (context) => AdminEditPage(),
         },
       ),
     );
