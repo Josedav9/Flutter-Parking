@@ -10,9 +10,9 @@ class Neighborhood {
   });
 
   factory Neighborhood.fromJson(Map<String, dynamic> json) => Neighborhood(
-        id: json["_id"],
-        neighborhoodname: json["neighborhoodname"],
-        address: json["address"],
+        id: json["_id"] ?? 'NA',
+        neighborhoodname: json["neighborhoodname"] ?? 'NA',
+        address: json["address"] ?? 'NA',
       );
 
   Map<String, dynamic> toJson() => {

@@ -12,6 +12,7 @@ class AdminHome extends StatelessWidget {
   _addNewCar(BuildContext ctx, UserData user) {
     showModalBottomSheet(
       context: ctx,
+      
       builder: (_) {
         return GestureDetector(
           onTap: () {},
@@ -25,9 +26,7 @@ class AdminHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserData>(context);
-    final userVehicles = Provider.of<UserVehicles>(context);
-    final userInitials = user.getUser.firstName.substring(0, 1) +
-        user.getUser.lastName.substring(0, 1);
+    final userInitials = user.getUser.firstName.substring(0, 1);
     return Scaffold(
       drawer: DrawerNavigation(),
       body: CustomScrollView(
@@ -54,35 +53,6 @@ class AdminHome extends StatelessWidget {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              if (index < userVehicles.vehicles.length)
-                return Card(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 5,
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: Padding(
-                        padding: EdgeInsets.all(6),
-                        child: FittedBox(
-                          child: Text(userInitials.toUpperCase()),
-                        ),
-                      ),
-                    ),
-                    title: Text(userVehicles.getByPosition(index).plate),
-                    subtitle: Text(userVehicles.getByPosition(index).brand +"-"+ userVehicles.getByPosition(index).color),
-                    trailing: Switch(
-                        value: true,
-                        onChanged: (bool value) {
-                          print(value);
-                        }),
-                  ),
-                );
-            }),
-          )
         ],
       ),
       floatingActionButton: FloatingActionButton(

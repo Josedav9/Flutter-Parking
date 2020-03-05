@@ -9,7 +9,7 @@ class User {
     String debt;
     bool payOnTime;
     int count;
-    int averagePoints;
+    double averagePoints;
     String id;
     String username;
     String email;
@@ -21,7 +21,7 @@ class User {
     int blockNumber;
     String address;
     int totalNumberOfUsers;
-    Neighborhood neighborhood;
+    var neighborhood;
     DateTime createdAt;
     String code;
     DateTime updatedAt;
@@ -59,8 +59,8 @@ class User {
         points: json["points"] ?? -1,
         isVerified: json["isVerified"],
         isOwner: json["isOwner"] ?? false,
-        debt: json["debt"] ?? -1,
-        payOnTime: json["payOnTime"] ?? -1,
+        debt: json["debt"] ?? "NA",
+        payOnTime: json["payOnTime"] ?? false,
         count: json["count"] ?? -1,
         averagePoints: json["averagePoints"] ?? -1,
         id: json["_id"],
@@ -74,7 +74,7 @@ class User {
         blockNumber: json["blockNumber"] ?? -1,
         address: json["address"] ?? '',
         totalNumberOfUsers: json["totalNumberOfUsers"] ?? -1,
-        neighborhood: Neighborhood.fromJson(json["neighborhood"]),
+        neighborhood: json["neighborhood"] != null ? Neighborhood.fromJson(json["neighborhood"]) : null,
         createdAt: DateTime.parse(json["createdAt"]),
         code: json["code"],
         updatedAt: DateTime.parse(json["updatedAt"]),
