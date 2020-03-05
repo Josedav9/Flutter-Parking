@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserData>(context);
     final userVehicles = Provider.of<UserVehicles>(context);
-    final userInitials = user.getUser.name.substring(0, 1) +
+    final userInitials = user.getUser.firstName.substring(0, 1) +
         user.getUser.lastName.substring(0, 1);
     return Scaffold(
       drawer: DrawerNavigation(),
