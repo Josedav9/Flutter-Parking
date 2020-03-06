@@ -1,5 +1,7 @@
+import 'dart:collection';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:parking/models/Position.dart';
 
 List<ParkingSpace> parkingSpaceFromJson(String str) => List<ParkingSpace>.from(json.decode(str).map((x) => ParkingSpace.fromJson(x)));
@@ -108,4 +110,38 @@ class Schedule {
         "rank": rank,
         "value": value,
     };
+}
+
+
+class ParkingSpaceProvider extends ChangeNotifier {
+   List<ParkingSpace> _parkingSpaces = [];
+
+  UnmodifiableListView<ParkingSpace> get spaces => UnmodifiableListView(_parkingSpaces);
+
+  void set(List<ParkingSpace> spaces) {
+    this._parkingSpaces = spaces;
+    notifyListeners();
+  }
+
+  ParkingSpace getByPosition(int position) {
+    return this._parkingSpaces[position];
+  }
+
+  void updateById(ParkingSpace space) {
+    var id = space.id;
+    for (var i = 0; i < _parkingSpaces.length; i++) {
+      if (id == _parkingSpaces[i].id) {
+        _parkingSpaces[i] = space;
+        break;
+      }
+    }
+  }
+
+  ParkingSpace findById(String id) {
+    for (var i = 0; i < _parkingSpaces.length; i++) {
+      if (id == _parkingSpaces[i].id) {
+        return _parkingSpaces[i];
+      }
+    }
+  }
 }

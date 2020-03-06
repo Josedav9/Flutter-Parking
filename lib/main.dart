@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:parking/models/ParkingSpace.dart';
 import 'package:parking/models/User.dart';
 import 'package:parking/models/UserResponse.dart';
 import 'package:parking/models/UserVehicles.dart';
 import 'package:parking/pages/admin_edit.dart';
 import 'package:parking/pages/admin_home.dart';
+import 'package:parking/pages/create_edit_parking.dart';
 import 'package:parking/pages/register_admin.dart';
 
 import 'package:provider/provider.dart';
@@ -30,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<UserProvider>(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider<ParkingSpaceProvider>(
+          create: (_) => ParkingSpaceProvider(),
         )
       ],
       child: MaterialApp(

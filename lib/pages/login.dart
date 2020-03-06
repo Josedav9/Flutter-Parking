@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking/models/ParkingSpace.dart';
 import 'package:parking/models/User.dart';
 import 'package:parking/models/UserVehicles.dart';
 
@@ -22,10 +23,14 @@ class LoginPage extends StatelessWidget {
     api.login(userName, userPassword).then((user) async {
       userProvider.setToken = user.token;
       userProvider.setUser = user.user;
+      var parkingSpaces = Provider.of<ParkingSpaceProvider>(ctx, listen: false);
       try {
         if (user.getUser.roles[0] == 'ROLE_ADMINISTRATION_ACCESS') {
-          var usersProvider = await api.getNeighborhoodUsers(user);
-          users.set(usersProvider);
+          var responses = await Future.wait(
+            [api.getNeighborhoodUsers(user), api.getParkingSpaces(user)],
+          );
+          users.set(responses[0]);
+          parkingSpaces.set(responses[1]);
           Navigator.pushNamed(ctx, 'admin-home');
         } else {
           var vehiclesRes = await api.getUserVehicles(user);
