@@ -6,7 +6,7 @@ class AdminEditPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Editar usuario'),
+        title: Text('Parqueaderos'),
       ),
       drawer: DrawerNavigation(),
     );

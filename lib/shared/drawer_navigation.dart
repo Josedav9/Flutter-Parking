@@ -7,7 +7,8 @@ import 'package:parking/models/UserResponse.dart';
 class DrawerNavigation extends StatelessWidget {
   final routesByRol = {
     'ROLE_ADMINISTRATION_ACCESS': [
-      ['Editar Usuarios', 'admin-edit'],
+      ['Listar Usuarios', 'admin-home'],
+      ['Parqueaderos', 'admin-edit'],
     ],
     'ROLE_USER_ACCESS': [
       ['Autos', 'home']
@@ -23,7 +24,7 @@ class DrawerNavigation extends StatelessWidget {
           style: TextStyle(fontSize: 16, color: Colors.grey[800]),
         ),
         onTap: () {
-          Navigator.pushNamed(ctx, item[1]);
+          Navigator.of(ctx).pushReplacementNamed(item[1]);
         },
       );
       userRoutes.add(newItem);

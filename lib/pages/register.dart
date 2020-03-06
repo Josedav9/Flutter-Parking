@@ -68,166 +68,167 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text('Registro'),
         ),
-        body: Container(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Nombre de usuario",
-                      hintStyle: TextStyle(color: Colors.grey),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Nombre de usuario",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      controller: _userName,
+                      validator: _simpleValidation,
                     ),
-                    controller: _userName,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Password",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Password",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      obscureText: true,
+                      controller: _password,
+                      validator: _simpleValidation,
                     ),
-                    obscureText: true,
-                    controller: _password,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Correo",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Correo",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _email,
+                      validator: _simpleValidation,
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    controller: _email,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Numero de Telefono",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Numero de Telefono",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      keyboardType: TextInputType.number,
+                      controller: _phoneNumber,
+                      validator: _simpleValidation,
                     ),
-                    keyboardType: TextInputType.number,
-                    controller: _phoneNumber,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Nombre",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Nombre",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      controller: _name,
+                      validator: _simpleValidation,
                     ),
-                    controller: _name,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Apellido",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Apellido",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      controller: _lastName,
+                      validator: _simpleValidation,
                     ),
-                    controller: _lastName,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Codigo del barrio",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Codigo del barrio",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      controller: _code,
+                      validator: _simpleValidation,
                     ),
-                    controller: _code,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Numero del bloque",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Numero del bloque",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      controller: _blockNumber,
+                      validator: _simpleValidation,
                     ),
-                    controller: _blockNumber,
-                    validator: _simpleValidation,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[100]))),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Numbero de apartamento",
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Numbero de apartamento",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      controller: _homeNumber,
+                      validator: _simpleValidation,
                     ),
-                    controller: _homeNumber,
-                    validator: _simpleValidation,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RaisedButton(
-                  onPressed: () => _submitForm(context),
-                  child: Text('Registrarse'),
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: 20,
                   ),
-                )
-              ],
+                  RaisedButton(
+                    onPressed: () => _submitForm(context),
+                    child: Text('Registrarse'),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ));

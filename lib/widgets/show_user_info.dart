@@ -33,7 +33,7 @@ class ShowUserInfo extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          user.debt != null ? warningBanner() : '',
+          user.debt != "NA" ? warningBanner() : SizedBox(),
           Container(
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
