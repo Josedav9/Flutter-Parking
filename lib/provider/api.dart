@@ -3,6 +3,7 @@ import 'package:parking/contants.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:parking/models/User.dart';
 
 import 'package:parking/models/UserResponse.dart';
 import 'package:parking/models/UserVehicles.dart';
@@ -57,12 +58,29 @@ class Api {
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
       } else {
-        var algo = vehicleFromJson(response.body);
-        return new Future.value(algo);
+        var vehicles = vehicleFromJson(response.body);
+        return new Future.value(vehicles);
       }
     } catch (e) {
       print("[getUserVehicle Error] $e");
       return new Future.error(e);
+    }
+  }
+
+  Future<List<User>> getNeighborhoodUsers(UserData user) async {
+    try {
+      var response = await http.get(REQUEST_USERS, headers: {
+        "Content-Type": "application/json",
+        "Authorization": user.getToken
+      });
+      if (response.statusCode >= 400) {
+        throw new ErrorDescription(response.body);
+      } else {
+        var users = userFromJson(response.body);
+        return new Future.value(users);
+      }
+    } catch (e) {
+      print("[getNeighborhoodUsers Error] $e");
     }
   }
 }

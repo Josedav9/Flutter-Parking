@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking/models/User.dart';
 import 'package:parking/models/UserResponse.dart';
 import 'package:parking/models/UserVehicles.dart';
 import 'package:parking/pages/admin_edit.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<UserVehicles>(
           create: (_) => UserVehicles(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (_) => UserProvider(),
         )
       ],
       child: MaterialApp(

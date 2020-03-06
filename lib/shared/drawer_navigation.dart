@@ -62,7 +62,7 @@ class DrawerNavigation extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.red[300]),
             ),
             onTap: () {
-              Navigator.pushNamed(context, 'login');
+              Navigator.popUntil(context, ModalRoute.withName('login'));
             },
           ),
         ],

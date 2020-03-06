@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking/models/User.dart';
 import 'package:parking/models/UserVehicles.dart';
 
 import 'package:provider/provider.dart';
@@ -14,23 +15,25 @@ class LoginPage extends StatelessWidget {
   final url = REQUEST_URL + SIGN_IN;
 
   void _submitData(BuildContext ctx, UserData userProvider,
-      UserVehicles vehiclesProvider) async {
+      UserVehicles vehiclesProvider, UserProvider users) async {
     String userName = _userNameController.text;
     String userPassword = _userPassword.text;
     Api api = new Api();
     api.login(userName, userPassword).then((user) async {
       userProvider.setToken = user.token;
       userProvider.setUser = user.user;
-
-      print(user.getUser.roles[0]);
-      if (user.getUser.roles[0] == 'ROLE_ADMINISTRATION_ACCESS') {
-        Navigator.pushNamed(ctx, 'admin-home');
-      } else {
-        try {
+      try {
+        if (user.getUser.roles[0] == 'ROLE_ADMINISTRATION_ACCESS') {
+          var usersProvider = await api.getNeighborhoodUsers(user);
+          users.set(usersProvider);
+          Navigator.pushNamed(ctx, 'admin-home');
+        } else {
           var vehiclesRes = await api.getUserVehicles(user);
           vehiclesProvider.set(vehiclesRes);
-        } catch (e) {}
-        Navigator.pushNamed(ctx, 'home');
+          Navigator.pushNamed(ctx, 'home');
+        }
+      } catch (e) {
+        print(e);
       }
     }).catchError((e) => print(e));
   }
@@ -39,6 +42,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserData>(context, listen: false);
     final vehicles = Provider.of<UserVehicles>(context, listen: false);
+    final users = Provider.of<UserProvider>(context, listen: false);
+    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Container(
@@ -56,7 +61,7 @@ class LoginPage extends StatelessWidget {
             elevation: 20,
             margin: EdgeInsets.all(50),
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.40,
+              height: height >= 690 ? height * 0.40 : height * 0.50,
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +87,8 @@ class LoginPage extends StatelessWidget {
                     child: Text('Iniciar Sesion'),
                     color: Colors.blue,
                     textColor: Colors.white,
-                    onPressed: () => _submitData(context, user, vehicles),
+                    onPressed: () =>
+                        _submitData(context, user, vehicles, users),
                   ),
                   SizedBox(height: 10),
                   FlatButton(
@@ -95,7 +101,7 @@ class LoginPage extends StatelessWidget {
                     child: Text("Registarse"),
                     textColor: Colors.blue,
                   ),
-                  FlatButton(
+/*                   FlatButton(
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -104,7 +110,7 @@ class LoginPage extends StatelessWidget {
                     },
                     child: Text("Registarse Admin"),
                     textColor: Colors.blue,
-                  )
+                  ) */
                 ],
               ),
             ),
