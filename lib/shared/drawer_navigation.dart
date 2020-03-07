@@ -72,7 +72,7 @@ class DrawerNavigation extends StatelessWidget {
                     }
                   },
                 )
-              : null,
+              : ListTile(),
           ListTile(
             title: Text(
               'Cerrar Sesion',

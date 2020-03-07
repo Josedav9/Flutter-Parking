@@ -8,7 +8,6 @@ import 'package:parking/models/Position.dart';
 import 'package:parking/models/User.dart';
 
 import 'package:parking/models/UserResponse.dart';
-import 'package:parking/models/UserVehicles.dart';
 import 'package:parking/models/Vehicle.dart';
 
 class Api {
@@ -17,7 +16,10 @@ class Api {
       var data = {'username': userName, 'password': password};
       var response = await http.post(REQUEST_LOGIN,
           body: jsonEncode(data),
-          headers: {"Content-Type": "application/json"});
+          headers: {
+            "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': "*"
+          });
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
       } else {
@@ -34,7 +36,7 @@ class Api {
       var response = await http.post(
         REQUEST_VEHICLES,
         body: jsonEncode(datos),
-        headers: {"Content-Type": "application/json", "Authorization": token},
+        headers: {"Content-Type": "application/json", "Authorization": token, 'Access-Control-Allow-Origin': "*"},
       );
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -52,7 +54,8 @@ class Api {
     try {
       var response = await http.get(REQUEST_VEHICLES, headers: {
         "Content-Type": "application/json",
-        "Authorization": user.getToken
+        "Authorization": user.getToken,
+        'Access-Control-Allow-Origin': "*"
       });
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -70,7 +73,8 @@ class Api {
     try {
       var response = await http.get(REQUEST_USERS, headers: {
         "Content-Type": "application/json",
-        "Authorization": user.getToken
+        "Authorization": user.getToken,
+        'Access-Control-Allow-Origin': "*"
       });
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -87,7 +91,8 @@ class Api {
     try {
       var response = await http.get(REQUEST_PARKINGSPACES, headers: {
         "Content-Type": "application/json",
-        "Authorization": user.getToken
+        "Authorization": user.getToken,
+        'Access-Control-Allow-Origin': "*"
       });
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -105,7 +110,7 @@ class Api {
       var response = await http.post(
         REQUEST_PARKINGSPACES,
         body: datos,
-        headers: {"Content-Type": "application/json", "Authorization": token},
+        headers: {"Content-Type": "application/json", "Authorization": token, 'Access-Control-Allow-Origin': "*"},
       );
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -125,7 +130,7 @@ class Api {
       var response = await http.patch(
         "$REQUEST_PARKINGSPACES/$id",
         body: datos,
-        headers: {"Content-Type": "application/json", "Authorization": token},
+        headers: {"Content-Type": "application/json", "Authorization": token, 'Access-Control-Allow-Origin': "*"},
       );
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -143,7 +148,7 @@ class Api {
     try {
       var response = await http.get(
         "${REQUEST_VEHICLE_BY_PLATE}/${plate}",
-        headers: {"Content-Type": "application/json", "Authorization": token},
+        headers: {"Content-Type": "application/json", "Authorization": token, 'Access-Control-Allow-Origin': "*"},
       );
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -163,7 +168,7 @@ class Api {
       var response = await http.patch(
         '${REQUEST_POSITION_UPDATE}/$id/$position',
         body: json.encode({'plate': plate}),
-        headers: {"Content-Type": "application/json", "Authorization": token},
+        headers: {"Content-Type": "application/json", "Authorization": token, 'Access-Control-Allow-Origin': "*"},
       );
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
@@ -183,7 +188,7 @@ class Api {
     try {
       var response = await http.get(
         '${REQUEST_BESTPOINTS_USERS}/1?pageSize=10',
-        headers: {"Content-Type": "application/json", "Authorization": token},
+        headers: {"Content-Type": "application/json", "Authorization": token, 'Access-Control-Allow-Origin': "*"},
       );
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);

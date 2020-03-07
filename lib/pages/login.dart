@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
         } else {
           var vehiclesRes = await api.getUserVehicles(user);
           vehiclesProvider.set(vehiclesRes);
-          Navigator.pushNamed(ctx, 'home');
+          Navigator.pushNamed(ctx, '/home');
         }
       } catch (e) {
         print(e);
