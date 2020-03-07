@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
           users.set(responses[0]);
           parkingSpaces.set(responses[1]);
           bestUsers.set(responses[2]);
-          Navigator.pushNamed(ctx, 'admin-home');
+          Navigator.pushNamed(ctx, '/admin-home');
         } else {
           var vehiclesRes = await api.getUserVehicles(user);
           vehiclesProvider.set(vehiclesRes);

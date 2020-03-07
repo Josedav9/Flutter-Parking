@@ -58,17 +58,17 @@ class MyApp extends StatelessWidget {
           const Locale('es'),
         ],
         title: 'Parking App',
-        initialRoute: 'login',
+        initialRoute: '/login',
         routes: {
-          'login': (context) => LoginPage(),
-          'register': (context) => RegisterPage(),
-          'home': (context) => HomePage(),
-          'register-admin': (context) => RegisterAdminPage(),
-          'admin-home': (context) => AdminHome(),
-          'admin-edit': (context) => AdminEditPage(),
-          'web-view': (context) => WebViewApp(),
-          'parking-manager': (context) => ParkingManager(),
-          'ranking': (context) => Ranking()
+          '/login': (context) => LoginPage(),
+          '/register': (context) => RegisterPage(),
+          '/home': (context) => HomePage(),
+          '/register-admin': (context) => RegisterAdminPage(),
+          '/admin-home': (context) => AdminHome(),
+          '/admin-edit': (context) => AdminEditPage(),
+          '/web-view': (context) => WebViewApp(),
+          '/parking-manager': (context) => ParkingManager(),
+          '/ranking': (context) => Ranking()
         },
       ),
     );

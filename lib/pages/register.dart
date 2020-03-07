@@ -204,6 +204,7 @@ class RegisterPage extends StatelessWidget {
                         border: Border(
                             bottom: BorderSide(color: Colors.grey[100]))),
                     child: TextFormField(
+                      textCapitalization: TextCapitalization.characters,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Codigo del barrio",

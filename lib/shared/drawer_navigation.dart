@@ -8,12 +8,12 @@ import 'package:url_launcher/url_launcher.dart';
 class DrawerNavigation extends StatelessWidget {
   final routesByRol = {
     'ROLE_ADMINISTRATION_ACCESS': [
-      ['Listar Usuarios', 'admin-home'],
-      ['Parqueaderos', 'admin-edit'],
-      ['Ranking', 'ranking']
+      ['Listar Usuarios', '/admin-home'],
+      ['Parqueaderos', '/admin-edit'],
+      ['Ranking', '/ranking']
     ],
     'ROLE_USER_ACCESS': [
-      ['Autos', 'home']
+      ['Autos', '/home']
     ]
   };
 
@@ -79,7 +79,7 @@ class DrawerNavigation extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.red[300]),
             ),
             onTap: () {
-              Navigator.popUntil(context, ModalRoute.withName('login'));
+              Navigator.popUntil(context, ModalRoute.withName('/login'));
             },
           ),
         ],
