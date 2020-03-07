@@ -38,19 +38,30 @@ class Position {
 class PositionProvider extends ChangeNotifier {
   List<Position> _positions = [];
 
-  UnmodifiableListView<Position> get positions => UnmodifiableListView(_positions);
+  UnmodifiableListView<Position> get positions =>
+      UnmodifiableListView(_positions);
 
   void setPosition(List<Position> positions) {
     this._positions = positions;
     notifyListeners();
   }
 
-  int getSize () {
+  int getSize() {
     return this._positions.length;
   }
 
   Position getByIndex(int index) {
     return _positions[index];
+  }
+
+  void updateById(Position position) {
+    for (var i = 0; i < _positions.length; i++) {
+      if(_positions[i].id == position.id) {
+        _positions[i] = position;
+        break;
+      }
+    }
+    notifyListeners();
   }
 
   Position getById(String id) {
@@ -64,10 +75,18 @@ class PositionProvider extends ChangeNotifier {
   Position getByPosition(String posnumber, String vehicleType) {
     for (var item in _positions) {
       if (item.posnumber == posnumber) {
-        if(vehicleType == item.vehicletype) {
+        if (vehicleType == item.vehicletype) {
           return item;
         }
         break;
+      }
+    }
+  }
+
+  Position getByPositionNoCheck(String posnumber) {
+    for (var item in _positions) {
+      if (item.posnumber == posnumber) {
+        return item;
       }
     }
   }

@@ -4,6 +4,7 @@ import 'package:parking/contants.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:parking/models/ParkingSpace.dart';
+import 'package:parking/models/Position.dart';
 import 'package:parking/models/User.dart';
 
 import 'package:parking/models/UserResponse.dart';
@@ -155,6 +156,30 @@ class Api {
         var vehicle = Vehicle.fromJson(json.decode(response.body));
         return new Future.value(vehicle);
       }
-    } catch (e) {}
+    } catch (e) {
+      print("[getVehicleByPlate Error] $e");
+      return new Future.error(e);
+    }
+  }
+
+  Future<Position> updatePosition(
+      String token, String position, String id, String plate) async {
+    try {
+      var response = await http.patch(
+        '${REQUEST_POSITION_UPDATE}/$id/$position',
+        body: json.encode({'plate': plate}),
+        headers: {"Content-Type": "application/json", "Authorization": token},
+      );
+      if (response.statusCode >= 400) {
+        throw new ErrorDescription(response.body);
+      } else {
+        print(json.decode(response.body)["status"]);
+        var positionRes = Position.fromJson(json.decode(response.body)["result"]["positions"][0]);
+        return new Future.value(positionRes);
+      }
+    } catch (e) {
+      print("[updatePosition Error] $e");
+      return new Future.error(e);
+    }
   }
 }

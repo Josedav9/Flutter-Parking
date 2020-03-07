@@ -6,6 +6,7 @@ final VEHICLES = '/vehicle';
 final USERS = '/user';
 final PARKINGSPACES = '/parkingspace';
 final PLATE = '/plate';
+final POSITIONS = '/positions';
 
 //Complete request url
 
@@ -15,3 +16,4 @@ final REQUEST_VEHICLES = REQUEST_URL + VEHICLES;
 final REQUEST_USERS = REQUEST_URL + USERS;
 final REQUEST_PARKINGSPACES = REQUEST_URL + PARKINGSPACES;
 final REQUEST_VEHICLE_BY_PLATE = REQUEST_URL + VEHICLES + PLATE;
+final REQUEST_POSITION_UPDATE = REQUEST_URL + PARKINGSPACES + POSITIONS;
