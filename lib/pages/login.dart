@@ -51,6 +51,7 @@ class LoginPage extends StatelessWidget {
     final users = Provider.of<UserProvider>(context, listen: false);
     final bestUsers = Provider.of<BestUserProvider>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Container(
@@ -69,6 +70,7 @@ class LoginPage extends StatelessWidget {
             margin: EdgeInsets.all(50),
             child: Container(
               height: height >= 690 ? height * 0.40 : height * 0.50,
+              width: width > 700 ? width * 0.30 : width,
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

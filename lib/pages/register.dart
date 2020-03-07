@@ -27,8 +27,11 @@ class RegisterPage extends StatelessWidget {
   }
 
   String _characterValidation(String value) {
-    if(value.length <= 8){
+    if(value.length < 8){
       return 'La contraseña debe contener al menos 8 caracteres';
+    }
+    else if(RegExp('[!@#\$%^&*(),.?":{}|<>ñ]').hasMatch(value)) {
+      return 'La contraseña no debe tener caracteres especiales';
     }
     return null;
   }

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:parking/models/UserResponse.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerNavigation extends StatelessWidget {
   final routesByRol = {
     'ROLE_ADMINISTRATION_ACCESS': [
       ['Listar Usuarios', 'admin-home'],
       ['Parqueaderos', 'admin-edit'],
-      ['Web View', 'web-view'],
       ['Ranking', 'ranking']
     ],
     'ROLE_USER_ACCESS': [
@@ -59,6 +59,20 @@ class DrawerNavigation extends StatelessWidget {
             ),
           ),
           ...userRoutes(loggedUserRole, context),
+          loggedUserRole == 'ROLE_ADMINISTRATION_ACCESS'
+              ? ListTile(
+                  title: Text("Upload",
+                      style: TextStyle(fontSize: 16, color: Colors.grey[800])),
+                  onTap: () async {
+                    const url = 'https://vecinoo.herokuapp.com/v1/api/file';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                )
+              : null,
           ListTile(
             title: Text(
               'Cerrar Sesion',
