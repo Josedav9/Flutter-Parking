@@ -21,7 +21,6 @@ class Api {
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
       } else {
-        print(response.body);
         return new Future.value(UserData.fromJson(json.decode(response.body)));
       }
     } catch (e) {
@@ -32,7 +31,6 @@ class Api {
 
   Future<Vehicle> addCar(String token, Map<String, dynamic> datos) async {
     try {
-      print(datos);
       var response = await http.post(
         REQUEST_VEHICLES,
         body: jsonEncode(datos),
@@ -41,7 +39,6 @@ class Api {
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
       } else {
-        print(response.body);
         var vehicles = Vehicle.fromJson(json.decode(response.body));
         return new Future.value(vehicles);
       }
@@ -105,7 +102,6 @@ class Api {
 
   Future<ParkingSpace> addParking(String token, String datos) async {
     try {
-      print(datos);
       var response = await http.post(
         REQUEST_PARKINGSPACES,
         body: datos,
@@ -114,7 +110,6 @@ class Api {
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
       } else {
-        print(response.body);
         var parking = ParkingSpace.fromJson(json.decode(response.body));
         return new Future.value(parking);
       }
@@ -174,11 +169,30 @@ class Api {
         throw new ErrorDescription(response.body);
       } else {
         print(json.decode(response.body)["status"]);
-        var positionRes = Position.fromJson(json.decode(response.body)["result"]["positions"][0]);
+        var positionRes = Position.fromJson(
+            json.decode(response.body)["result"]["positions"][0]);
         return new Future.value(positionRes);
       }
     } catch (e) {
       print("[updatePosition Error] $e");
+      return new Future.error(e);
+    }
+  }
+
+  Future<List<User>> getBestPointsUsers(String token) async {
+    try {
+      var response = await http.get(
+        '${REQUEST_BESTPOINTS_USERS}/1?pageSize=10',
+        headers: {"Content-Type": "application/json", "Authorization": token},
+      );
+      if (response.statusCode >= 400) {
+        throw new ErrorDescription(response.body);
+      } else {
+        var user = userFromJson(response.body);
+        return new Future.value(user);
+      }
+    } catch (e) {
+      print("[getBestPointsUsers Error] $e");
       return new Future.error(e);
     }
   }

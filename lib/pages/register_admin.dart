@@ -16,7 +16,15 @@ class RegisterAdminPage extends StatelessWidget {
   final _code = TextEditingController();
   final _blockNumber = TextEditingController();
   final _homeNumber = TextEditingController();
+  final _documentId = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  String _characterValidation(String value) {
+    if(value.length <= 8){
+      return 'La contraseña debe contener al menos 8 caracteres';
+    }
+    return null;
+  }
 
   String _simpleValidation(value) {
     if (value.isEmpty) {
@@ -39,6 +47,7 @@ class RegisterAdminPage extends StatelessWidget {
         'lastName': this._lastName.text,
         'blockNumber': this._blockNumber.text,
         'homeNumber': this._homeNumber.text,
+        'documentId': this._documentId.text,
         'enabled': true
       };
       try {
@@ -105,7 +114,7 @@ class RegisterAdminPage extends StatelessWidget {
                     ),
                     obscureText: true,
                     controller: _password,
-                    validator: _simpleValidation,
+                    validator: _characterValidation,
                   ),
                 ),
                 Container(
@@ -167,6 +176,21 @@ class RegisterAdminPage extends StatelessWidget {
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
                     controller: _lastName,
+                    validator: _simpleValidation,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[100]))),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "NIT",
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                    controller: _documentId,
                     validator: _simpleValidation,
                   ),
                 ),

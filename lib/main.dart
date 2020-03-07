@@ -7,6 +7,7 @@ import 'package:parking/models/UserVehicles.dart';
 import 'package:parking/pages/admin_edit.dart';
 import 'package:parking/pages/admin_home.dart';
 import 'package:parking/pages/parking_manager.dart';
+import 'package:parking/pages/ranking.dart';
 import 'package:parking/pages/register_admin.dart';
 import 'package:parking/pages/web_view_app.dart';
 
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<PositionProvider>(
           create: (_) => PositionProvider(),
+        ),
+        ChangeNotifierProvider<BestUserProvider>(
+          create: (_) => BestUserProvider(),
         )
       ],
       child: MaterialApp(
@@ -63,7 +67,8 @@ class MyApp extends StatelessWidget {
           'admin-home': (context) => AdminHome(),
           'admin-edit': (context) => AdminEditPage(),
           'web-view': (context) => WebViewApp(),
-          'parking-manager': (context) => ParkingManager()
+          'parking-manager': (context) => ParkingManager(),
+          'ranking': (context) => Ranking()
         },
       ),
     );

@@ -4,8 +4,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:parking/models/Neighborhood.dart';
 
-List<User> userFromJson(String str) => List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
-String userToJson(List<User> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<User> userFromJson(String str) =>
+    List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
+String userToJson(List<User> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class User {
   bool enabled;
@@ -69,7 +71,8 @@ class User {
         debt: json["debt"] ?? "NA",
         payOnTime: json["payOnTime"] ?? false,
         count: json["count"] ?? -1,
-        averagePoints: json["averagePoints"] != null ? json["averagePoints"] + 0.0 : -1.0,
+        averagePoints:
+            json["averagePoints"] != null ? json["averagePoints"] + 0.0 : -1.0,
         id: json["_id"],
         username: json["username"],
         email: json["email"],
@@ -118,6 +121,39 @@ class User {
 }
 
 class UserProvider extends ChangeNotifier {
+  List<User> _users = [];
+
+  UnmodifiableListView<User> get users => UnmodifiableListView(_users);
+
+  void set(List<User> vehicles) {
+    this._users = vehicles;
+    notifyListeners();
+  }
+
+  User getByPosition(int position) {
+    return this._users[position];
+  }
+
+  void updateById(User vehicle) {
+    var id = vehicle.id;
+    for (var i = 0; i < _users.length; i++) {
+      if (id == _users[i].id) {
+        _users[i] = vehicle;
+        break;
+      }
+    }
+  }
+
+  User findById(String id) {
+    for (var i = 0; i < _users.length; i++) {
+      if (id == _users[i].id) {
+        return _users[i];
+      }
+    }
+  }
+}
+
+class BestUserProvider extends ChangeNotifier {
   List<User> _users = [];
 
   UnmodifiableListView<User> get users => UnmodifiableListView(_users);

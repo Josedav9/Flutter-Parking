@@ -16,7 +16,7 @@ class LoginPage extends StatelessWidget {
   final url = REQUEST_URL + SIGN_IN;
 
   void _submitData(BuildContext ctx, UserData userProvider,
-      UserVehicles vehiclesProvider, UserProvider users) async {
+      UserVehicles vehiclesProvider, UserProvider users, BestUserProvider bestUsers) async {
     String userName = _userNameController.text;
     String userPassword = _userPassword.text;
     Api api = new Api();
@@ -27,10 +27,11 @@ class LoginPage extends StatelessWidget {
       try {
         if (user.getUser.roles[0] == 'ROLE_ADMINISTRATION_ACCESS') {
           var responses = await Future.wait(
-            [api.getNeighborhoodUsers(user), api.getParkingSpaces(user)],
+            [api.getNeighborhoodUsers(user), api.getParkingSpaces(user), api.getBestPointsUsers(user.token)],
           );
           users.set(responses[0]);
           parkingSpaces.set(responses[1]);
+          bestUsers.set(responses[2]);
           Navigator.pushNamed(ctx, 'admin-home');
         } else {
           var vehiclesRes = await api.getUserVehicles(user);
@@ -48,6 +49,7 @@ class LoginPage extends StatelessWidget {
     final user = Provider.of<UserData>(context, listen: false);
     final vehicles = Provider.of<UserVehicles>(context, listen: false);
     final users = Provider.of<UserProvider>(context, listen: false);
+    final bestUsers = Provider.of<BestUserProvider>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -93,7 +95,7 @@ class LoginPage extends StatelessWidget {
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () =>
-                        _submitData(context, user, vehicles, users),
+                        _submitData(context, user, vehicles, users, bestUsers),
                   ),
                   SizedBox(height: 10),
                   FlatButton(

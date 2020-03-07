@@ -9,7 +9,8 @@ class DrawerNavigation extends StatelessWidget {
     'ROLE_ADMINISTRATION_ACCESS': [
       ['Listar Usuarios', 'admin-home'],
       ['Parqueaderos', 'admin-edit'],
-      ['Web View', 'web-view']
+      ['Web View', 'web-view'],
+      ['Ranking', 'ranking']
     ],
     'ROLE_USER_ACCESS': [
       ['Autos', 'home']

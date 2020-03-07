@@ -16,11 +16,19 @@ class RegisterPage extends StatelessWidget {
   final _code = TextEditingController();
   final _blockNumber = TextEditingController();
   final _homeNumber = TextEditingController();
+  final _documentId = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   String _simpleValidation(value) {
     if (value.isEmpty) {
       return 'Por favor llene este campo';
+    }
+    return null;
+  }
+
+  String _characterValidation(String value) {
+    if(value.length <= 8){
+      return 'La contraseña debe contener al menos 8 caracteres';
     }
     return null;
   }
@@ -39,6 +47,7 @@ class RegisterPage extends StatelessWidget {
         'lastName': this._lastName.text,
         'blockNumber': this._blockNumber.text,
         'homeNumber': this._homeNumber.text,
+        'documentId': this._documentId.text,
         'enabled': true
       };
       try {
@@ -57,6 +66,7 @@ class RegisterPage extends StatelessWidget {
           this._lastName.clear();
           this._blockNumber.clear();
           this._homeNumber.clear();
+          this._documentId.clear();
           Navigator.pop(context);
         }
       } catch (e) {
@@ -105,7 +115,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       obscureText: true,
                       controller: _password,
-                      validator: _simpleValidation,
+                      validator: _characterValidation,
                     ),
                   ),
                   Container(
@@ -167,6 +177,21 @@ class RegisterPage extends StatelessWidget {
                         hintStyle: TextStyle(color: Colors.grey),
                       ),
                       controller: _lastName,
+                      validator: _simpleValidation,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[100]))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Numero de documento",
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                      controller: _documentId,
                       validator: _simpleValidation,
                     ),
                   ),
