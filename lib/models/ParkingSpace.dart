@@ -123,6 +123,12 @@ class ParkingSpaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void add(ParkingSpace spaces) {
+    _parkingSpaces.add(spaces);
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+
   ParkingSpace getByPosition(int position) {
     return this._parkingSpaces[position];
   }
@@ -135,6 +141,7 @@ class ParkingSpaceProvider extends ChangeNotifier {
         break;
       }
     }
+    notifyListeners();
   }
 
   ParkingSpace findById(String id) {

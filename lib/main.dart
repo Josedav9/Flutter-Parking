@@ -6,7 +6,9 @@ import 'package:parking/models/UserVehicles.dart';
 import 'package:parking/pages/admin_edit.dart';
 import 'package:parking/pages/admin_home.dart';
 import 'package:parking/pages/create_edit_parking.dart';
+import 'package:parking/pages/parking_space_editor.dart';
 import 'package:parking/pages/register_admin.dart';
+import 'package:parking/pages/web_view_app.dart';
 
 import 'package:provider/provider.dart';
 
@@ -16,7 +18,9 @@ import 'package:parking/pages/login.dart';
 import 'package:parking/pages/register.dart';
 import 'package:parking/pages/home.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -55,6 +59,8 @@ class MyApp extends StatelessWidget {
           'register-admin': (context) => RegisterAdminPage(),
           'admin-home': (context) => AdminHome(),
           'admin-edit': (context) => AdminEditPage(),
+          'web-view': (context) => WebViewApp(),
+          'parking-manager': (context) => ParkingSpaceEditor()
         },
       ),
     );
