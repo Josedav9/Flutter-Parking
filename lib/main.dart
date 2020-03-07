@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:parking/models/ParkingSpace.dart';
+import 'package:parking/models/Position.dart';
 import 'package:parking/models/User.dart';
 import 'package:parking/models/UserResponse.dart';
 import 'package:parking/models/UserVehicles.dart';
 import 'package:parking/pages/admin_edit.dart';
 import 'package:parking/pages/admin_home.dart';
-import 'package:parking/pages/create_edit_parking.dart';
-import 'package:parking/pages/parking_space_editor.dart';
+import 'package:parking/pages/parking_manager.dart';
 import 'package:parking/pages/register_admin.dart';
 import 'package:parking/pages/web_view_app.dart';
 
@@ -39,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ParkingSpaceProvider>(
           create: (_) => ParkingSpaceProvider(),
+        ),
+        ChangeNotifierProvider<PositionProvider>(
+          create: (_) => PositionProvider(),
         )
       ],
       child: MaterialApp(
@@ -60,7 +63,7 @@ class MyApp extends StatelessWidget {
           'admin-home': (context) => AdminHome(),
           'admin-edit': (context) => AdminEditPage(),
           'web-view': (context) => WebViewApp(),
-          'parking-manager': (context) => ParkingSpaceEditor()
+          'parking-manager': (context) => ParkingManager()
         },
       ),
     );

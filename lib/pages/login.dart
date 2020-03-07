@@ -106,16 +106,6 @@ class LoginPage extends StatelessWidget {
                     child: Text("Registarse"),
                     textColor: Colors.blue,
                   ),
-/*                   FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterPage()));
-                    },
-                    child: Text("Registarse Admin"),
-                    textColor: Colors.blue,
-                  ) */
                 ],
               ),
             ),

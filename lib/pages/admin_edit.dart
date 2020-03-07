@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:parking/models/ParkingSpace.dart';
+import 'package:parking/models/Position.dart';
 import 'package:parking/pages/create_edit_parking.dart';
+import 'package:parking/pages/parking_manager.dart';
 import 'package:parking/shared/drawer_navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +10,7 @@ class AdminEditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final parkingSpaceProvider = Provider.of<ParkingSpaceProvider>(context);
+    final positions = Provider.of<PositionProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Parqueaderos'),
@@ -54,7 +57,17 @@ class AdminEditPage extends StatelessWidget {
                     ),
                     FlatButton(
                       child: Text('Acceder'),
-                      onPressed: () {/* ... */},
+                      onPressed: () {
+                        positions.setPosition(parkingSpaceProvider.getByPosition(index).positions);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => ParkingManager(
+                              parking:
+                                  parkingSpaceProvider.getByPosition(index),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

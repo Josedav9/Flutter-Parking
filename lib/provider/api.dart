@@ -123,7 +123,8 @@ class Api {
     }
   }
 
-  Future<ParkingSpace> updateParking(String token, String datos, String id) async {
+  Future<ParkingSpace> updateParking(
+      String token, String datos, String id) async {
     try {
       var response = await http.patch(
         "$REQUEST_PARKINGSPACES/$id",
@@ -133,7 +134,6 @@ class Api {
       if (response.statusCode >= 400) {
         throw new ErrorDescription(response.body);
       } else {
-        print(response.body);
         var parking = ParkingSpace.fromJson(json.decode(response.body));
         return new Future.value(parking);
       }
@@ -143,5 +143,18 @@ class Api {
     }
   }
 
-
+  Future<Vehicle> getVehicleByPlate(String token, String plate) async {
+    try {
+      var response = await http.get(
+        "${REQUEST_VEHICLE_BY_PLATE}/${plate}",
+        headers: {"Content-Type": "application/json", "Authorization": token},
+      );
+      if (response.statusCode >= 400) {
+        throw new ErrorDescription(response.body);
+      } else {
+        var vehicle = Vehicle.fromJson(json.decode(response.body));
+        return new Future.value(vehicle);
+      }
+    } catch (e) {}
+  }
 }
